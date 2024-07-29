@@ -26,9 +26,16 @@ public class Recipecollection {
         recipe.add_ingredients(ingredients);
     }
 
-    static void print_recipe_list() {
+    public static void print_recipe_list() {
         System.out.println("Rezeptliste");
     }
+
+    public static void search_for_recipe() {
+        Scanner addRecipeScanner = new Scanner(System.in);
+        System.out.println("Tippen Sie das gesuchte Rezept ein");
+        String desiredRecipe = addRecipeScanner.nextLine();
+    }
+
     public static void main(String[] args) {
         Scanner recipeScanner = new Scanner(System.in);
         System.out.println("Rezeptverzeichnis");
@@ -48,7 +55,7 @@ public class Recipecollection {
                 add_recipe_to_list();
                 break;
             case "c":
-                //search_for_recipe();
+                search_for_recipe();
                 break;
             case "d":
                 break;
@@ -58,11 +65,4 @@ public class Recipecollection {
         }
     }
 
-
-
-    public void search_for_recipe() {
-        Scanner addRecipeScanner = new Scanner(System.in);
-        System.out.println("Tippen Sie das gesuchte Rezept ein");
-        String desiredRecipe = addRecipeScanner.nextLine();
-    }
 }
