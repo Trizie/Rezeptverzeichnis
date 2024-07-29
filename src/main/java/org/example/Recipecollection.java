@@ -1,24 +1,20 @@
 package org.example;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 
+public class Recipecollection {
 
-public class Main {
+    private List<Recipe> recipes;
 
-    private List<String> recipe_list;
-
-
-    static void search_for_recipe() {
-        Scanner addRecipeScanner = new Scanner(System.in);
-        System.out.println("Tippen Sie das gesuchte Rezept ein");
-        String recipe = addRecipeScanner.nextLine();
+    public Recipecollection(){
+        recipes = new ArrayList<>();
     }
 
-    static void add_recipe_to_list() {
+    public static void add_recipe_to_list() {
         Scanner addRecipeScanner = new Scanner(System.in);
-        System.out.println("Recipe is added to list");
+        System.out.println("Rezept wird zur Liste hinzugefuegt");
         System.out.println("Rezeptname eintragen:");
         String recipeName = addRecipeScanner.nextLine();
         System.out.println("Benoetigte Zutaten eintragen:");
@@ -26,11 +22,20 @@ public class Main {
         System.out.println("Anleitung eintragen:");
         String instructions = addRecipeScanner.nextLine();
 
+        Recipe recipe = new Recipe(recipeName, instructions);
+        recipe.add_ingredients(ingredients);
     }
 
-    static void print_recipe_list() {
+    public static void print_recipe_list() {
         System.out.println("Rezeptliste");
     }
+
+    public static void search_for_recipe() {
+        Scanner addRecipeScanner = new Scanner(System.in);
+        System.out.println("Tippen Sie das gesuchte Rezept ein");
+        String desiredRecipe = addRecipeScanner.nextLine();
+    }
+
     public static void main(String[] args) {
         Scanner recipeScanner = new Scanner(System.in);
         System.out.println("Rezeptverzeichnis");
@@ -59,4 +64,5 @@ public class Main {
 
         }
     }
+
 }
