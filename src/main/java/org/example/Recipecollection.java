@@ -17,12 +17,22 @@ public class Recipecollection {
         System.out.println("Rezept wird zur Liste hinzugefuegt");
         System.out.println("Rezeptname eintragen:");
         String recipeName = addRecipeScanner.nextLine();
+        System.out.println("Geben Sie den Rezepttyp ein (a) Fruehstueck oder b) Hauptmahlzeit");
+        String type = addRecipeScanner.nextLine();
         System.out.println("Benoetigte Zutaten eintragen:");
         String ingredients = addRecipeScanner.nextLine();
         System.out.println("Anleitung eintragen:");
         String instructions = addRecipeScanner.nextLine();
 
-        Recipe recipe = new Recipe(recipeName, instructions);
+        Recipe recipe;
+        if (type.equalsIgnoreCase("a")) {
+            recipe = new BreakfastRecipe(recipeName, instructions);
+        } else if (type.equalsIgnoreCase("b")) {
+            recipe = new MainDishRecipe(recipeName, instructions);
+        } else {
+            System.out.println("Unbekannter Rezepttyp. Rezept wird nicht hinzugefuegt.");
+            return;
+        }
         recipe.add_ingredients(ingredients);
     }
 
