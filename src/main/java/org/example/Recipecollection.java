@@ -1,4 +1,5 @@
 package org.example;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -7,12 +8,15 @@ import java.util.Scanner;
 public class Recipecollection {
 
     private List<Recipe> recipes;
+    private Connection connection;
+    private RecipeDatabank databank;
 
-    public Recipecollection(){
+    public Recipecollection(RecipeDatabank databank){
         recipes = new ArrayList<>();
+        this.databank = databank;
     }
 
-    public static void add_recipe_to_list() {
+    public void add_recipe_to_list() {
         Scanner addRecipeScanner = new Scanner(System.in);
         System.out.println("Rezept wird zur Liste hinzugefuegt");
         System.out.println("Rezeptname eintragen:");
@@ -26,27 +30,33 @@ public class Recipecollection {
 
         Recipe recipe;
         if (type.equalsIgnoreCase("a")) {
-            recipe = new BreakfastRecipe(recipeName, instructions);
+            recipe = new BreakfastRecipe(recipeName, type, instructions);
         } else if (type.equalsIgnoreCase("b")) {
-            recipe = new MainDishRecipe(recipeName, instructions);
+            recipe = new MainDishRecipe(recipeName, type, instructions);
         } else {
             System.out.println("Unbekannter Rezepttyp. Rezept wird nicht hinzugefuegt.");
             return;
         }
         recipe.add_ingredients(ingredients);
+
+        databank.add_recipe_to_DB(recipe);
     }
 
-    public static void print_recipe_list() {
+    public void print_recipe_list() {
         System.out.println("Rezeptliste");
     }
 
-    public static void search_for_recipe() {
+    public void search_for_recipe() {
         Scanner addRecipeScanner = new Scanner(System.in);
         System.out.println("Tippen Sie das gesuchte Rezept ein");
         String desiredRecipe = addRecipeScanner.nextLine();
     }
 
     public static void main(String[] args) {
+        RecipeDatabank databank = new RecipeDatabank();
+        Recipecollection recipes = new Recipecollection(databank);
+        databank.connect();
+        databank.create_table();
         Scanner recipeScanner = new Scanner(System.in);
         System.out.println("Rezeptverzeichnis");
         System.out.println("Bitte waehlen:");
@@ -59,13 +69,13 @@ public class Recipecollection {
 
         switch(chooseFunction){
             case "a":
-                print_recipe_list();
+                recipes.print_recipe_list();
                 break;
             case "b":
-                add_recipe_to_list();
+                recipes.add_recipe_to_list();
                 break;
             case "c":
-                search_for_recipe();
+                recipes.search_for_recipe();
                 break;
             case "d":
                 break;
