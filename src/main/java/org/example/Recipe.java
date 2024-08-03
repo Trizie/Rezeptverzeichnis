@@ -6,13 +6,13 @@ import java.util.List;
 
 abstract class Recipe {
     private String recipe_name;
-    private List<String> ingredients;
+    private String ingredients;
     private String instructions;
     private String type;
 
-    public Recipe(String recipe_name, String type, String instructions){
+    public Recipe(String recipe_name, String ingredients, String type, String instructions){
         this.recipe_name = recipe_name;
-        this.ingredients = new ArrayList<>();
+        this.ingredients = ingredients;
         this.instructions = instructions;
         this.type = type;
 
@@ -30,20 +30,20 @@ abstract class Recipe {
         return instructions;
     }
 
-    public Array get_Ingredients() {
-        return (Array) ingredients;
+    public String get_Ingredients() {
+        return ingredients;
     }
 
-    public void add_ingredients(String ingredient){
-        ingredients.add(ingredient);
-    }
+   // public void add_ingredients(String ingredient){
+    //    ingredients.add(ingredient);
+    //}
 
     public abstract void print_precooking_instructions();
 }
 
 class BreakfastRecipe extends Recipe {
-    public BreakfastRecipe(String name, String type, String instructions) {
-        super(name, type, instructions);
+    public BreakfastRecipe(String name, String ingredients, String type, String instructions) {
+        super(name, ingredients, type, instructions);
     }
 
     @Override
@@ -53,8 +53,8 @@ class BreakfastRecipe extends Recipe {
 }
 
 class MainDishRecipe extends Recipe {
-    public MainDishRecipe(String name, String type, String instructions) {
-        super(name, type, instructions);
+    public MainDishRecipe(String name, String ingredients, String type, String instructions) {
+        super(name, ingredients, type, instructions);
     }
 
     @Override

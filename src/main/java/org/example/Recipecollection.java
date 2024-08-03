@@ -30,14 +30,13 @@ public class Recipecollection {
 
         Recipe recipe;
         if (type.equalsIgnoreCase("a")) {
-            recipe = new BreakfastRecipe(recipeName, type, instructions);
+            recipe = new BreakfastRecipe(recipeName, ingredients, type, instructions);
         } else if (type.equalsIgnoreCase("b")) {
-            recipe = new MainDishRecipe(recipeName, type, instructions);
+            recipe = new MainDishRecipe(recipeName, ingredients, type, instructions);
         } else {
             System.out.println("Unbekannter Rezepttyp. Rezept wird nicht hinzugefuegt.");
             return;
         }
-        recipe.add_ingredients(ingredients);
 
         databank.add_recipe_to_DB(recipe);
     }

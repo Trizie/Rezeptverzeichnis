@@ -45,11 +45,11 @@ class RecipeDatabank implements databaseConnection{
     @Override
     public void add_recipe_to_DB(Recipe recipe){
         try {
-            String sql = "INSERT INTO rezepte(name, typ, zutaten, anleitung) VALUES(?, ?, ?, ?)";
+            String sql = "INSERT INTO Rezepte(name, typ, zutaten, anleitung) VALUES(?, ?, ?, ?)";
             try (PreparedStatement pstmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                 pstmt.setString(1, recipe.get_Name());
                 pstmt.setString(2, recipe.get_type());
-                pstmt.setArray(3, recipe.get_Ingredients());
+                pstmt.setString(3, recipe.get_Ingredients());
                 pstmt.setString(4, recipe.get_instructions());
                 pstmt.executeUpdate();
             }
